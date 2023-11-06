@@ -1,0 +1,36 @@
+from tkinter import *
+from webbrowser import *
+from PIL import ImageTk, Image
+from PIL import *
+import cv2
+def openurlfb():
+    open_new_tab("https://www.facebook.com/KetNoiXuThanh")
+def openurltk():
+    open_new_tab("https://www.tiktok.com/@knxt13012014?is_from_webapp=1&sender_device=pc")
+def openqrcode():
+    img1 = cv2.imread('QR.png')
+    scale = 60
+    width = int(img1.shape[1]*scale/100)
+    height = int(img1.shape[0]*scale/100)
+    dim = (width,height)    
+    re = cv2.resize(img1,dim, interpolation=cv2.INTER_AREA)
+    cv2.imshow("H",re)
+    cv2.waitKey(0)
+root = Tk()
+root.geometry("250x285")
+root.resizable(width=True, height=True)
+root.title("CLB-KNXT")
+root.iconbitmap("CLB-KNXT.ico")
+root.configure(background='cornflowerblue')
+img = Image.open("KNXT.png")
+img = img.resize((250, 250))
+img = ImageTk.PhotoImage(img)
+panel = Label(root, image=img)
+panel.image = img
+panel.pack()
+button = Frame(root)
+Button(root,text="Facebook", command = openurlfb,background='deeppink1',fg='black',font=("Times New Roman",9),width=8).pack(side='left')
+Button(root,text="Tiktok", command = openurltk,background='deeppink1',fg='black',font=("Times New Roman",9),width=8).pack(side='right')
+Button(root,text="QR-CODE", command = openqrcode,background='deeppink1',fg='black',font=("Times New Roman",9),width=8).pack(side='right')
+Button(root,text="Code", command = openurltk,background='deeppink1',fg='black',font=("Times New Roman",9),width=8).pack(side='left')
+root.mainloop()
